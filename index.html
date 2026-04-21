@@ -3,85 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Duo Challenge - Readable Edition 🚀</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <title>Duo Challenge - Welcome Edition 🌟</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --pink: #ff4081; --dark: #121212; }
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Segoe UI', sans-serif; background: var(--dark); overflow: hidden; }
-        .container { background: white; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 6px solid var(--pink); box-sizing: border-box; }
-        .card-bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; object-fit: cover; filter: brightness(35%); }
-        .content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 12px; box-sizing: border-box; }
+        :root { --pink: #ff4081; --dark: #0a0a0a; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Poppins', sans-serif; background: var(--dark); overflow: hidden; color: #333; }
         
-        input[type="text"], button { padding: 12px; margin: 5px; border-radius: 12px; border: 2px solid var(--pink); font-size: 16px; width: 85%; outline: none; }
-        .btn { background: var(--pink); color: white; border: none; cursor: pointer; font-weight: bold; z-index: 100; }
+        .container { background: white; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 6px solid var(--pink); box-sizing: border-box; transition: all 0.5s ease; }
         .hidden { display: none !important; }
-
-        /* Setup Labels */
-        .upload-label { font-size: 12px; font-weight: bold; color: var(--pink); display: block; margin-top: 10px; width: 85%; text-align: left; }
-
-        /* Question Screen - BIG & CLEAR */
-        .q-box { background: white; padding: 25px; border-radius: 20px; width: 88%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 10; }
-        #qDisplay { font-weight: bold; font-size: 20px; color: #222; line-height: 1.4; margin-bottom: 20px; }
-
-        /* Final Result - BIGGER PILLS */
-        .profile-img { width: 9vh; height: 9vh; border-radius: 50%; border: 3px solid white; object-fit: cover; box-shadow: 0 0 15px var(--pink); }
-        .header-box { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; margin-top: 5px; }
-        .names-text { color: white; text-shadow: 2px 2px 10px black; font-family: 'Pacifico', cursive; font-size: 2.8vh; margin: 0; }
         
-        .result-grid { display: flex; flex-direction: column; width: 100%; gap: 4px; flex-grow: 1; justify-content: center; }
-        .ans-pill { 
-            background: rgba(255, 255, 255, 0.98); 
-            padding: 6px 14px; 
-            border-radius: 10px; 
-            font-size: 1.35vh; /* Font size increased for readability */
-            border-left: 5px solid var(--pink); 
-            text-align: left; 
-            margin: 0 5px; 
-            line-height: 1.3;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-        }
-        .ans-pill b { color: var(--pink); display: block; font-size: 1.2vh; margin-bottom: 2px; }
+        /* Welcome Screen Style */
+        .welcome-box { text-align: center; animation: slideUp 0.8s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        input[type="text"], button { padding: 14px; margin: 8px; border-radius: 15px; border: 2px solid var(--pink); font-size: 16px; width: 80%; outline: none; transition: 0.3s; }
+        .btn { background: var(--pink); color: white; border: none; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4); }
 
-        /* Interactive Gift Card */
-        .gift-area { width: 95%; height: 50vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        #giftItem { max-width: 100%; max-height: 100%; object-fit: contain; cursor: move; }
+        /* Welcome Message Text */
+        .welcome-msg { font-family: 'Pacifico', cursive; color: var(--pink); font-size: 32px; margin-bottom: 20px; }
+
+        /* Other Styles from previous version */
+        .card-bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; object-fit: cover; filter: brightness(30%); }
+        .content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 12px; box-sizing: border-box; }
+        .profile-img { width: 8.5vh; height: 8.5vh; border-radius: 50%; border: 3px solid white; object-fit: cover; }
+        .header-box { display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; margin-top: 5px; }
+        .names-text { color: white; text-shadow: 2px 2px 15px var(--pink); font-family: 'Pacifico', cursive; font-size: 2.5vh; margin: 0; }
+        .result-grid { display: flex; flex-direction: column; width: 100%; gap: 4px; flex-grow: 1; justify-content: center; }
+        .ans-pill { background: rgba(255, 255, 255, 0.95); padding: 6px 12px; border-radius: 12px; font-size: 1.25vh; border-left: 6px solid var(--pink); text-align: left; margin: 0 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .ans-pill b { color: var(--pink); display: block; font-size: 1.1vh; }
     </style>
 </head>
 <body>
 
-    <div id="step1" class="container">
-        <h2 style="color:var(--pink); margin-top:0;">Duo Card Designer ✨</h2>
-        <input type="text" id="n1" placeholder="Your Name">
+    <div id="step0" class="container">
+        <div class="welcome-box">
+            <h2 style="color: var(--pink); font-family: 'Pacifico', cursive;">Hello! ✨</h2>
+            <p style="font-size: 14px; color: #666;">Please enter your name to start</p>
+            <input type="text" id="visitorName" placeholder="Your Name here...">
+            <button class="btn" onclick="showWelcome()">Enter ➡️</button>
+        </div>
+    </div>
+
+    <div id="welcomeScreen" class="container hidden">
+        <div class="welcome-box">
+            <div class="welcome-msg" id="displayWelcome"></div>
+            <p style="font-size: 15px; color: #555;">Ready for the Duo Challenge?</p>
+            <button class="btn" onclick="goToSetup()">Let's Go! 🚀</button>
+        </div>
+    </div>
+
+    <div id="step1" class="container hidden">
+        <h3 style="color:var(--pink); font-family: 'Pacifico', cursive;">Duo Card Setup</h3>
+        <input type="text" id="n1" placeholder="Your Name (Owner)">
         <input type="text" id="n2" placeholder="Friend's Name">
         
-        <span class="upload-label">👤 Your Photo:</span>
-        <input type="file" id="up1" accept="image/*">
-        
-        <span class="upload-label">👥 Friend's Photo:</span>
-        <input type="file" id="up2" accept="image/*">
-        
-        <span class="upload-label">🖼️ Background Wallpaper:</span>
-        <input type="file" id="upBG" accept="image/*">
-        
-        <button class="btn" onclick="start()" style="margin-top:15px;">Start Challenge ➡️</button>
+        <div style="width: 85%; text-align: left; font-size: 11px;">
+            <p style="margin: 5px 0; color: #888; font-weight: bold;">👤 YOUR PIC</p>
+            <input type="file" id="up1" accept="image/*">
+            <p style="margin: 10px 0 5px 0; color: #888; font-weight: bold;">👥 FRIEND'S PIC</p>
+            <input type="file" id="up2" accept="image/*">
+            <p style="margin: 10px 0 5px 0; color: #888; font-weight: bold;">🖼️ BACKGROUND</p>
+            <input type="file" id="upBG" accept="image/*">
+        </div>
+        <button class="btn" onclick="start()" style="margin-top:10px;">Next ➡️</button>
     </div>
 
     <div id="step2" class="container hidden">
-        <div class="q-box">
-            <span id="qCount" style="color:var(--pink); font-weight:bold; font-size:14px;">QUESTION 1/10</span>
-            <div id="qDisplay"></div>
-            <input type="text" id="ansInput" placeholder="Type answer here...">
+        <div style="background:white; padding:25px; border-radius:20px; width:85%; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <h4 id="qCount" style="color:var(--pink); margin:0; font-size: 12px;">QUESTION</h4>
+            <p id="qDisplay" style="font-weight:bold; font-size:18px; margin:15px 0;"></p>
+            <input type="text" id="ansInput" placeholder="Write your answer...">
             <button class="btn" onclick="nextQ()">Next ➡️</button>
-            <button class="btn" onclick="handleBack()" style="background:#555; font-size:12px; margin-top:10px;">⬅️ Go Back</button>
         </div>
     </div>
 
     <div id="step3" class="container hidden">
-        <h2 style="color:var(--pink)">Special Gift 🎁</h2>
-        <span class="upload-label" style="text-align:center;">Select Photo/Video for Gift:</span>
-        <input type="file" id="upGift" accept="image/*,video/*" style="width:80%">
+        <h2 style="color:var(--pink); font-family: 'Pacifico', cursive;">Final Touch 🎁</h2>
+        <input type="file" id="upGift" accept="image/*,video/*">
         <input type="text" id="giftEmoji" placeholder="Enter Emojis (🍫🧸🌹)">
-        <button class="btn" onclick="finish()">Show Final Card ✨</button>
+        <button class="btn" onclick="finish()">Create Final Card ✨</button>
     </div>
 
     <div id="finalAnsSheet" class="container hidden">
@@ -92,26 +93,12 @@
                 <h2 class="names-text"><span class="nm1"></span> ♡ <span class="nm2"></span></h2>
                 <img id="f2" class="profile-img">
             </div>
-            
-            <div class="result-grid" id="ansGrid">
-                </div>
-
+            <div class="result-grid" id="ansGrid"></div>
             <div id="giftBtnArea"></div>
-            
-            <div style="background:rgba(255,255,255,0.9); padding:10px; border-radius:15px; width:92%; text-align:center; margin-bottom: 5px;">
+            <div style="background:rgba(255,255,255,0.92); padding:8px; border-radius:15px; width:90%; text-align:center;">
                 <div class="finalEmojis" style="font-size:24px;"></div>
-                <span style="font-size:10px; color:var(--pink); font-weight:bold;">📸 PERFECT FOR SCREENSHOT</span>
+                <p style="font-size:9px; color:var(--pink); font-weight:bold; margin:0;">📸 PERFECT FOR STATUS</p>
             </div>
-        </div>
-    </div>
-
-    <div id="giftCardPage" class="container hidden">
-        <img id="bg2" class="card-bg-layer">
-        <div class="content">
-            <div class="header-box" style="margin-top:20px;"><img id="g1" class="profile-img"><h2 class="names-text"><span class="nm1"></span> ♡ <span class="nm2"></span></h2><img id="g2" class="profile-img"></div>
-            <div class="gift-area" id="zoomContainer"></div>
-            <div class="finalEmojis" style="font-size:40px;"></div>
-            <button class="btn" onclick="showScreen('finalAnsSheet')" style="width:60%;">⬅️ Back to Answers</button>
         </div>
     </div>
 
@@ -127,14 +114,27 @@
             "What’s one way I can be a better friend to you right now?",
             "If we got arrested together, what would it probably be for?",
             "Which of my bad decisions was your secret favorite?",
-            "If we swapped lives for a week, what’s the first thing you’d mess up?"
+            "If we swapped lives for a week, what’s the first thing you’d mess up about mine?"
         ];
 
-        function showScreen(id) { document.querySelectorAll('.container').forEach(c => c.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
+        function showScreen(id) { 
+            document.querySelectorAll('.container').forEach(c => c.classList.add('hidden')); 
+            document.getElementById(id).classList.remove('hidden'); 
+        }
+
+        function showWelcome() {
+            const name = document.getElementById('visitorName').value;
+            if(!name) return alert("Please enter your name first!");
+            document.getElementById('displayWelcome').innerText = `Welcome, ${name}!`;
+            showScreen('welcomeScreen');
+        }
+
+        function goToSetup() { showScreen('step1'); }
+
         function read(f, cb) { if(f) { let r = new FileReader(); r.onload = e => cb(e.target.result); r.readAsDataURL(f); } }
 
         function start() {
-            if(!document.getElementById('n1').value) return alert("Please enter names!");
+            if(!document.getElementById('n1').value) return alert("Fill names!");
             read(document.getElementById('up1').files[0], d => p1 = d);
             read(document.getElementById('up2').files[0], d => p2 = d);
             read(document.getElementById('upBG').files[0], d => bg = d);
@@ -144,18 +144,16 @@
         function loadQ() { 
             document.getElementById('qCount').innerText = `QUESTION ${currentIdx + 1}/10`;
             document.getElementById('qDisplay').innerText = questions[currentIdx]; 
-            document.getElementById('ansInput').value = answers[currentIdx] || ""; 
+            document.getElementById('ansInput').value = ""; 
         }
 
         function nextQ() { 
             let val = document.getElementById('ansInput').value;
-            if(!val) return alert("Write your answer first!");
-            answers[currentIdx] = val; 
+            if(!val) return alert("Please type your answer!");
+            answers.push(val); 
             currentIdx++; 
             if(currentIdx < 10) loadQ(); else showScreen('step3'); 
         }
-
-        function handleBack() { if(currentIdx > 0) { currentIdx--; loadQ(); } }
 
         function finish() {
             let gf = document.getElementById('upGift').files[0];
@@ -166,36 +164,17 @@
             const n1 = document.getElementById('n1').value, n2 = document.getElementById('n2').value;
             document.querySelectorAll('.nm1').forEach(e => e.innerText = n1);
             document.querySelectorAll('.nm2').forEach(e => e.innerText = n2);
-            document.querySelectorAll('.finalEmojis').forEach(e => e.innerText = document.getElementById('giftEmoji').value || "🎁");
-            if(p1) { document.getElementById('f1').src = p1; document.getElementById('g1').src = p1; }
-            if(p2) { document.getElementById('f2').src = p2; document.getElementById('g2').src = p2; }
-            if(bg) { document.getElementById('bg1').src = bg; document.getElementById('bg2').src = bg; }
+            document.querySelectorAll('.finalEmojis').forEach(e => e.innerText = document.getElementById('giftEmoji').value || "💖");
+            if(p1) document.getElementById('f1').src = p1;
+            if(p2) document.getElementById('f2').src = p2;
+            if(bg) document.getElementById('bg1').src = bg;
 
             let grid = document.getElementById('ansGrid'); grid.innerHTML = "";
             answers.forEach((a, i) => { 
-                grid.innerHTML += `<div class="ans-pill"><b>Q: ${questions[i]}</b>Ans: ${a}</div>`; 
+                grid.innerHTML += `<div class="ans-pill"><b>${i+1}. ${questions[i]}</b>${a}</div>`; 
             });
-
-            if(giftD) {
-                document.getElementById('giftBtnArea').innerHTML = `<button class="btn" style="padding:8px; font-size:12px; width:auto;" onclick="showScreen('giftCardPage')">🎁 View Secret Gift</button>`;
-                document.getElementById('zoomContainer').innerHTML = gMime === 'image' ? `<img src="${giftD}" id="giftItem">` : `<video src="${giftD}" id="giftItem" autoplay loop muted></video>`;
-                initZoom();
-            }
             showScreen('finalAnsSheet');
-        }
-
-        function initZoom() {
-            const el = document.getElementById('giftItem');
-            let scale = 1, posX = 0, posY = 0, startX, startY;
-            const container = document.getElementById('zoomContainer');
-            container.addEventListener('touchstart', e => {
-                if(e.touches.length === 1) { startX = e.touches[0].pageX - posX; startY = e.touches[0].pageY - posY; }
-            });
-            container.addEventListener('touchmove', e => {
-                if(e.touches.length === 1) { posX = e.touches[0].pageX - startX; posY = e.touches[0].pageY - startY; }
-                el.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
-            });
         }
     </script>
 </body>
-  </html>
+</html>
