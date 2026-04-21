@@ -3,177 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Duo Challenge - Welcome Edition 🌟</title>
+    <title>Duo Challenge - Fixed Magic ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root { --pink: #ff4081; --dark: #0a0a0a; }
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Poppins', sans-serif; background: var(--dark); overflow: hidden; color: #333; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Poppins', sans-serif; background: var(--dark); overflow: hidden; }
         
-        .container { background: white; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 6px solid var(--pink); box-sizing: border-box; transition: all 0.5s ease; }
+        .container { background: white; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 6px solid var(--pink); box-sizing: border-box; z-index: 10; }
         .hidden { display: none !important; }
-        
-        /* Welcome Screen Style */
-        .welcome-box { text-align: center; animation: slideUp 0.8s ease; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        
-        input[type="text"], button { padding: 14px; margin: 8px; border-radius: 15px; border: 2px solid var(--pink); font-size: 16px; width: 80%; outline: none; transition: 0.3s; }
-        .btn { background: var(--pink); color: white; border: none; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3); }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4); }
 
-        /* Welcome Message Text */
-        .welcome-msg { font-family: 'Pacifico', cursive; color: var(--pink); font-size: 32px; margin-bottom: 20px; }
+        /* --- MAGIC RAIN (Flowers & Sparkles) --- */
+        .magic-item {
+            position: absolute;
+            top: -20px;
+            z-index: 999; /* Sabse upar */
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
 
-        /* Other Styles from previous version */
-        .card-bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; object-fit: cover; filter: brightness(30%); }
-        .content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 12px; box-sizing: border-box; }
-        .profile-img { width: 8.5vh; height: 8.5vh; border-radius: 50%; border: 3px solid white; object-fit: cover; }
-        .header-box { display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; margin-top: 5px; }
-        .names-text { color: white; text-shadow: 2px 2px 15px var(--pink); font-family: 'Pacifico', cursive; font-size: 2.5vh; margin: 0; }
-        .result-grid { display: flex; flex-direction: column; width: 100%; gap: 4px; flex-grow: 1; justify-content: center; }
-        .ans-pill { background: rgba(255, 255, 255, 0.95); padding: 6px 12px; border-radius: 12px; font-size: 1.25vh; border-left: 6px solid var(--pink); text-align: left; margin: 0 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .ans-pill b { color: var(--pink); display: block; font-size: 1.1vh; }
+        /* Welcome Box */
+        .welcome-box { text-align: center; z-index: 1000; position: relative; }
+        .welcome-msg { font-family: 'Pacifico', cursive; color: var(--pink); font-size: 35px; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(255,64,129,0.3); }
+
+        /* Other Styles */
+        input[type="text"], button { padding: 12px; margin: 8px; border-radius: 12px; border: 2px solid var(--pink); width: 80%; font-size: 15px; }
+        .btn { background: var(--pink); color: white; font-weight: bold; border: none; cursor: pointer; }
+        .card-bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; object-fit: cover; filter: brightness(25%); }
+        .content { position: relative; z-index: 5; width: 100%; height: 100%; display: flex; flex-direction: column; padding: 10px; box-sizing: border-box; }
+        .result-grid { display: flex; flex-direction: column; gap: 6px; overflow-y: auto; flex-grow: 1; padding: 10px 0; scrollbar-width: none; }
+        .ans-pill { background: rgba(255, 255, 255, 0.95); padding: 10px; border-radius: 12px; font-size: 13px; border-left: 5px solid var(--pink); margin: 0 10px; line-height: 1.4; word-wrap: break-word; }
+        .ans-pill b { color: var(--pink); display: block; font-size: 11px; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
     <div id="step0" class="container">
-        <div class="welcome-box">
-            <h2 style="color: var(--pink); font-family: 'Pacifico', cursive;">Hello! ✨</h2>
-            <p style="font-size: 14px; color: #666;">Please enter your name to start</p>
-            <input type="text" id="visitorName" placeholder="Your Name here...">
-            <button class="btn" onclick="showWelcome()">Enter ➡️</button>
-        </div>
+        <h2 style="color: var(--pink); font-family: 'Pacifico';">Duo Card Magic ✨</h2>
+        <input type="text" id="visitorName" placeholder="Enter your name...">
+        <button class="btn" onclick="showWelcome()">Unlock Magic ➡️</button>
     </div>
 
-    <div id="welcomeScreen" class="container hidden">
+    <div id="welcomeScreen" class="container hidden" style="background: #fff5f8;">
         <div class="welcome-box">
             <div class="welcome-msg" id="displayWelcome"></div>
-            <p style="font-size: 15px; color: #555;">Ready for the Duo Challenge?</p>
-            <button class="btn" onclick="goToSetup()">Let's Go! 🚀</button>
+            <p style="color: #666; font-weight: 500;">Magic is falling for you! ✨🌸</p>
+            <button class="btn" onclick="goToSetup()" style="margin-top: 20px;">Let's Start! 🚀</button>
         </div>
     </div>
 
     <div id="step1" class="container hidden">
-        <h3 style="color:var(--pink); font-family: 'Pacifico', cursive;">Duo Card Setup</h3>
-        <input type="text" id="n1" placeholder="Your Name (Owner)">
+        <h3 style="color:var(--pink);">Duo Setup</h3>
+        <input type="text" id="n1" placeholder="Your Name">
         <input type="text" id="n2" placeholder="Friend's Name">
-        
-        <div style="width: 85%; text-align: left; font-size: 11px;">
-            <p style="margin: 5px 0; color: #888; font-weight: bold;">👤 YOUR PIC</p>
-            <input type="file" id="up1" accept="image/*">
-            <p style="margin: 10px 0 5px 0; color: #888; font-weight: bold;">👥 FRIEND'S PIC</p>
-            <input type="file" id="up2" accept="image/*">
-            <p style="margin: 10px 0 5px 0; color: #888; font-weight: bold;">🖼️ BACKGROUND</p>
-            <input type="file" id="upBG" accept="image/*">
+        <div style="width:85%; font-size:11px; text-align:left; color:#888;">
+            <p>Your Photo: <input type="file" id="up1" accept="image/*"></p>
+            <p>Friend Photo: <input type="file" id="up2" accept="image/*"></p>
+            <p>Wallpaper: <input type="file" id="upBG" accept="image/*"></p>
         </div>
-        <button class="btn" onclick="start()" style="margin-top:10px;">Next ➡️</button>
+        <button class="btn" onclick="start()">Next ➡️</button>
     </div>
 
     <div id="step2" class="container hidden">
-        <div style="background:white; padding:25px; border-radius:20px; width:85%; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            <h4 id="qCount" style="color:var(--pink); margin:0; font-size: 12px;">QUESTION</h4>
-            <p id="qDisplay" style="font-weight:bold; font-size:18px; margin:15px 0;"></p>
-            <input type="text" id="ansInput" placeholder="Write your answer...">
+        <div style="background:white; padding:20px; border-radius:20px; width:88%; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.1);">
+            <p id="qDisplay" style="font-weight:bold; font-size:17px;"></p>
+            <input type="text" id="ansInput" placeholder="Answer here...">
             <button class="btn" onclick="nextQ()">Next ➡️</button>
         </div>
     </div>
 
     <div id="step3" class="container hidden">
-        <h2 style="color:var(--pink); font-family: 'Pacifico', cursive;">Final Touch 🎁</h2>
+        <h2 style="color:var(--pink)">The Surprise 🎁</h2>
         <input type="file" id="upGift" accept="image/*,video/*">
-        <input type="text" id="giftEmoji" placeholder="Enter Emojis (🍫🧸🌹)">
-        <button class="btn" onclick="finish()">Create Final Card ✨</button>
+        <input type="text" id="giftEmoji" placeholder="Enter Emojis (🧸🍫)">
+        <button class="btn" onclick="finish()">Finish ✨</button>
     </div>
 
     <div id="finalAnsSheet" class="container hidden">
         <img id="bg1" class="card-bg-layer">
         <div class="content">
-            <div class="header-box">
-                <img id="f1" class="profile-img">
-                <h2 class="names-text"><span class="nm1"></span> ♡ <span class="nm2"></span></h2>
-                <img id="f2" class="profile-img">
+            <div style="display:flex; justify-content:center; gap:10px; align-items:center;">
+                <img id="f1" style="width:60px; height:60px; border-radius:50%; border:2px solid white;">
+                <h2 style="color:white; font-family:'Pacifico'; font-size:18px;"><span class="nm1"></span> ♡ <span class="nm2"></span></h2>
+                <img id="f2" style="width:60px; height:60px; border-radius:50%; border:2px solid white;">
             </div>
             <div class="result-grid" id="ansGrid"></div>
-            <div id="giftBtnArea"></div>
-            <div style="background:rgba(255,255,255,0.92); padding:8px; border-radius:15px; width:90%; text-align:center;">
-                <div class="finalEmojis" style="font-size:24px;"></div>
-                <p style="font-size:9px; color:var(--pink); font-weight:bold; margin:0;">📸 PERFECT FOR STATUS</p>
+            <div style="background:white; padding:10px; border-radius:15px; text-align:center; margin-top:5px;">
+                <div id="giftEmojiDisplay" style="font-size:20px;"></div>
+                <p style="font-size:9px; color:var(--pink); font-weight:bold; margin:0;">SCROLL TO READ ALL ANSWERS</p>
             </div>
         </div>
     </div>
 
     <script>
-        let currentIdx = 0, answers = [], p1, p2, bg, giftD, gMime;
+        let currentIdx = 0, answers = [], p1, p2, bg, giftD;
         const questions = [
             "What’s one thing you’ve never told me because you thought I’d judge you?",
-            "When do you feel most like yourself?",
+            "When do you feel most like yourself around me?",
             "What’s a dream you’re scared to say out loud?",
-            "If you could relive one memory with me, which one would you pick?",
-            "What’s something I do that actually annoys you, but you never mention?",
-            "Be honest — what’s one way I’ve changed in the last year?",
-            "What’s one way I can be a better friend to you right now?",
-            "If we got arrested together, what would it probably be for?",
-            "Which of my bad decisions was your secret favorite?",
-            "If we swapped lives for a week, what’s the first thing you’d mess up about mine?"
+            "If you could relive one memory with me, which one?",
+            "What’s something I do that annoys you secretly?",
+            "How have I changed in the last year according to you?",
+            "How can I be a better friend to you right now?",
+            "If we got arrested together, what would it be for?",
+            "Which of my bad decisions was your favorite?",
+            "What’s the first thing you’d mess up if we swapped lives?"
         ];
 
-        function showScreen(id) { 
-            document.querySelectorAll('.container').forEach(c => c.classList.add('hidden')); 
-            document.getElementById(id).classList.remove('hidden'); 
-        }
-
         function showWelcome() {
-            const name = document.getElementById('visitorName').value;
-            if(!name) return alert("Please enter your name first!");
+            let name = document.getElementById('visitorName').value;
+            if(!name) return alert("Enter your name!");
             document.getElementById('displayWelcome').innerText = `Welcome, ${name}!`;
-            showScreen('welcomeScreen');
+            document.getElementById('step0').classList.add('hidden');
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+            startMagic();
         }
 
-        function goToSetup() { showScreen('step1'); }
+        // --- NEW MAGIC ANIMATION (Flowers & Sparkles) ---
+        function startMagic() {
+            const symbols = ['🌸', '✨', '🌼', '⭐', '🌷', '💫'];
+            setInterval(() => {
+                const item = document.createElement('div');
+                item.className = 'magic-item';
+                item.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                item.style.left = Math.random() * 100 + 'vw';
+                item.style.fontSize = Math.random() * 20 + 15 + 'px';
+                item.style.duration = Math.random() * 3 + 2 + 's';
+                item.style.animationDuration = item.style.duration;
+                
+                document.getElementById('welcomeScreen').appendChild(item);
+                
+                setTimeout(() => { item.remove(); }, 5000);
+            }, 200);
+        }
 
-        function read(f, cb) { if(f) { let r = new FileReader(); r.onload = e => cb(e.target.result); r.readAsDataURL(f); } }
+        function goToSetup() { 
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+        }
 
         function start() {
-            if(!document.getElementById('n1').value) return alert("Fill names!");
-            read(document.getElementById('up1').files[0], d => p1 = d);
-            read(document.getElementById('up2').files[0], d => p2 = d);
-            read(document.getElementById('upBG').files[0], d => bg = d);
-            showScreen('step2'); loadQ();
+            let f1 = document.getElementById('up1').files[0];
+            let f2 = document.getElementById('up2').files[0];
+            let fb = document.getElementById('upBG').files[0];
+            let r = new FileReader();
+            if(f1) { let r1 = new FileReader(); r1.onload=e=>p1=e.target.result; r1.readAsDataURL(f1); }
+            if(f2) { let r2 = new FileReader(); r2.onload=e=>p2=e.target.result; r2.readAsDataURL(f2); }
+            if(fb) { let rb = new FileReader(); rb.onload=e=>bg=e.target.result; rb.readAsDataURL(fb); }
+            
+            setTimeout(() => {
+                document.getElementById('step1').classList.add('hidden');
+                document.getElementById('step2').classList.remove('hidden');
+                loadQ();
+            }, 500);
         }
 
-        function loadQ() { 
-            document.getElementById('qCount').innerText = `QUESTION ${currentIdx + 1}/10`;
-            document.getElementById('qDisplay').innerText = questions[currentIdx]; 
-            document.getElementById('ansInput').value = ""; 
+        function loadQ() {
+            document.getElementById('qDisplay').innerText = questions[currentIdx];
+            document.getElementById('ansInput').value = "";
         }
 
-        function nextQ() { 
-            let val = document.getElementById('ansInput').value;
-            if(!val) return alert("Please type your answer!");
-            answers.push(val); 
-            currentIdx++; 
-            if(currentIdx < 10) loadQ(); else showScreen('step3'); 
+        function nextQ() {
+            let v = document.getElementById('ansInput').value;
+            if(!v) return alert("Answer please!");
+            answers.push(v); currentIdx++;
+            if(currentIdx < 10) loadQ(); else {
+                document.getElementById('step2').classList.add('hidden');
+                document.getElementById('step3').classList.remove('hidden');
+            }
         }
 
         function finish() {
-            let gf = document.getElementById('upGift').files[0];
-            if(gf) { gMime = gf.type.split('/')[0]; read(gf, d => { giftD = d; finalize(); }); } else finalize();
-        }
-
-        function finalize() {
-            const n1 = document.getElementById('n1').value, n2 = document.getElementById('n2').value;
-            document.querySelectorAll('.nm1').forEach(e => e.innerText = n1);
-            document.querySelectorAll('.nm2').forEach(e => e.innerText = n2);
-            document.querySelectorAll('.finalEmojis').forEach(e => e.innerText = document.getElementById('giftEmoji').value || "💖");
+            document.querySelectorAll('.nm1').forEach(e=>e.innerText=document.getElementById('n1').value);
+            document.querySelectorAll('.nm2').forEach(e=>e.innerText=document.getElementById('n2').value);
+            document.getElementById('giftEmojiDisplay').innerText = document.getElementById('giftEmoji').value || "💖";
             if(p1) document.getElementById('f1').src = p1;
             if(p2) document.getElementById('f2').src = p2;
             if(bg) document.getElementById('bg1').src = bg;
 
-            let grid = document.getElementById('ansGrid'); grid.innerHTML = "";
-            answers.forEach((a, i) => { 
-                grid.innerHTML += `<div class="ans-pill"><b>${i+1}. ${questions[i]}</b>${a}</div>`; 
+            let grid = document.getElementById('ansGrid');
+            grid.innerHTML = "";
+            answers.forEach((a, i) => {
+                grid.innerHTML += `<div class="ans-pill"><b>${i+1}. ${questions[i]}</b>${a}</div>`;
             });
-            showScreen('finalAnsSheet');
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('finalAnsSheet').classList.remove('hidden');
         }
     </script>
 </body>
