@@ -3,89 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Duo Challenge - Final Ultra Pro ✨</title>
+    <title>Duo Challenge - Animated Edition 🌈</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --pink: #ff4081; --neon: #39FF14; --dark: #0a0a0a; }
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Poppins', sans-serif; background: var(--dark); overflow: hidden; }
+        :root { --pink: #ff4081; --neon: #39FF14; }
         
-        .container { background: white; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 6px solid var(--pink); box-sizing: border-box; }
+        /* 1. ANIMATED BACKGROUND (Eye-Friendly) */
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Poppins', sans-serif; overflow: hidden; }
+        
+        .animated-bg {
+            width: 100vw; height: 100vh;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container { width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 6px solid var(--pink); box-sizing: border-box; background: transparent; }
         .hidden { display: none !important; }
 
-        /* Magic Rain Animation */
-        .magic-item { position: absolute; top: -20px; z-index: 9999; pointer-events: none; animation: fall linear forwards; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-
-        /* Neon Question Box */
+        /* 2. FLOATING NEON BOX ANIMATION */
         .q-box { 
             background: var(--neon); 
             padding: 25px; 
-            border-radius: 20px; 
+            border-radius: 25px; 
             width: 85%; 
             text-align: center; 
-            box-shadow: 0 0 25px var(--neon); 
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.4); 
             border: 4px solid #000;
             color: #000;
+            animation: float 4s ease-in-out infinite;
         }
 
-        /* Standard UI Elements */
-        input[type="text"], button { padding: 12px; margin: 8px; border-radius: 12px; border: 2px solid var(--pink); width: 85%; font-size: 15px; outline: none; }
-        .btn { background: var(--pink); color: white; font-weight: bold; border: none; cursor: pointer; transition: 0.3s; }
-        .btn:active { transform: scale(0.95); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
 
-        /* Final Result Styling */
-        .card-bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; object-fit: cover; filter: brightness(25%); }
-        .content { position: relative; z-index: 5; width: 100%; height: 100%; display: flex; flex-direction: column; padding: 12px; box-sizing: border-box; }
-        .profile-img { width: 7.5vh; height: 7.5vh; border-radius: 50%; border: 2px solid white; object-fit: cover; }
-        .names-text { color: white; font-family: 'Pacifico', cursive; font-size: 2.2vh; margin: 0; text-shadow: 2px 2px 5px #000; }
+        /* Magic Items Animation */
+        .magic-item { position: absolute; top: -20px; z-index: 9999; pointer-events: none; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        /* General UI */
+        input[type="text"], button { padding: 12px; margin: 8px; border-radius: 12px; border: 2px solid var(--pink); width: 85%; font-size: 15px; outline: none; }
+        .btn { background: var(--pink); color: white; font-weight: bold; border: none; cursor: pointer; transition: 0.3s; z-index: 10; }
         
+        .card-bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; object-fit: cover; filter: brightness(30%); }
+        .content { position: relative; z-index: 5; width: 100%; height: 100%; display: flex; flex-direction: column; padding: 12px; box-sizing: border-box; }
+        .profile-img { width: 7vh; height: 7vh; border-radius: 50%; border: 2px solid white; object-fit: cover; }
+        .names-text { color: white; font-family: 'Pacifico', cursive; font-size: 2vh; text-shadow: 2px 2px 5px #000; }
         .result-grid { display: flex; flex-direction: column; gap: 6px; overflow-y: auto; flex-grow: 1; padding: 10px 0; scrollbar-width: none; }
-        .ans-pill { background: rgba(255, 255, 255, 0.95); padding: 10px; border-radius: 12px; font-size: 13px; border-left: 6px solid var(--pink); margin: 0 5px; line-height: 1.4; word-wrap: break-word; }
-        .ans-pill b { color: var(--pink); display: block; font-size: 11px; margin-bottom: 2px; }
+        .ans-pill { background: rgba(255, 255, 255, 0.95); padding: 10px; border-radius: 12px; font-size: 13px; border-left: 6px solid var(--pink); margin: 0 5px; line-height: 1.4; }
     </style>
 </head>
-<body>
+<body class="animated-bg">
 
     <div id="step0" class="container">
-        <h2 style="color: var(--pink); font-family: 'Pacifico';">Duo Card Magic ✨</h2>
+        <h2 style="color: white; font-family: 'Pacifico'; text-shadow: 0 0 10px var(--pink);">Duo Card Magic ✨</h2>
         <input type="text" id="visitorName" placeholder="Enter your name...">
         <button class="btn" onclick="showWelcome()">Unlock Magic ➡️</button>
     </div>
 
-    <div id="welcomeScreen" class="container hidden" style="background: #fff5f8;">
-        <div style="text-align:center; z-index: 1000;">
-            <h1 id="displayWelcome" style="font-family: 'Pacifico'; color: var(--pink); font-size: 35px; margin: 0;"></h1>
-            <p style="color: #666;">Magic is falling for you! 🌸✨</p>
-            <button class="btn" onclick="showScreen('step1')" style="margin-top: 20px;">Let's Start! 🚀</button>
+    <div id="welcomeScreen" class="container hidden">
+        <div style="text-align:center;">
+            <h1 id="displayWelcome" style="font-family: 'Pacifico'; color: var(--pink); font-size: 35px; text-shadow: 0 0 15px white;"></h1>
+            <p style="color: #ccc;">Soft magic is falling... 🌸</p>
+            <button class="btn" onclick="showScreen('step1')">Let's Start! 🚀</button>
         </div>
     </div>
 
     <div id="step1" class="container hidden">
-        <h3 style="color:var(--pink);">Card Setup</h3>
-        <input type="text" id="n1" placeholder="Your Name">
-        <input type="text" id="n2" placeholder="Friend's Name">
-        <div style="width:85%; font-size:11px; text-align:left; color:#888;">
-            <p>YOU: <input type="file" id="up1" accept="image/*"></p>
-            <p>FRIEND: <input type="file" id="up2" accept="image/*"></p>
-            <p>WALLPAPER: <input type="file" id="upBG" accept="image/*"></p>
+        <div style="background: rgba(255,255,255,0.9); padding: 20px; border-radius: 20px; width: 85%;">
+            <h3 style="color:var(--pink); margin-top:0;">Setup</h3>
+            <input type="text" id="n1" placeholder="Your Name">
+            <input type="text" id="n2" placeholder="Friend Name">
+            <div style="font-size:10px; text-align:left; color:#555;">
+                <p>YOU: <input type="file" id="up1" accept="image/*"></p>
+                <p>FRIEND: <input type="file" id="up2" accept="image/*"></p>
+                <p>WALLPAPER: <input type="file" id="upBG" accept="image/*"></p>
+            </div>
+            <button class="btn" onclick="startSetup()">Next ➡️</button>
         </div>
-        <button class="btn" onclick="startSetup()">Next ➡️</button>
     </div>
 
     <div id="step2" class="container hidden">
         <div class="q-box">
-            <span id="qCount" style="font-size:12px; font-weight:bold; opacity:0.7;"></span>
+            <span id="qCount" style="font-size:11px; font-weight:bold; opacity:0.6;"></span>
             <p id="qDisplay" style="font-weight:bold; font-size:18px; margin:15px 0;"></p>
-            <input type="text" id="ansInput" placeholder="Write answer..." style="background:white; border-color:#000;">
-            <button class="btn" onclick="nextQ()" style="background:#000; color:var(--neon);">Next ➡️</button>
+            <input type="text" id="ansInput" placeholder="Answer..." style="background:white; border-color:#000;">
+            <button class="btn" onclick="nextQ()" style="background:#000; color:var(--neon); border:none;">Next ➡️</button>
         </div>
     </div>
 
     <div id="step3" class="container hidden">
-        <h2 style="color:var(--pink); font-family:'Pacifico';">The Surprise 🎁</h2>
-        <input type="file" id="upGift" accept="image/*,video/*">
-        <input type="text" id="giftEmoji" placeholder="Enter Emojis (🍫🧸)">
-        <button class="btn" onclick="finish()">Finish ✨</button>
+        <div style="background:white; padding:20px; border-radius:20px; width:80%;">
+            <h2 style="color:var(--pink); font-family:'Pacifico';">The Gift 🎁</h2>
+            <input type="file" id="upGift" accept="image/*,video/*">
+            <input type="text" id="giftEmoji" placeholder="Emojis (🍫🧸)">
+            <button class="btn" onclick="finish()">Create Card ✨</button>
+        </div>
     </div>
 
     <div id="finalAnsSheet" class="container hidden">
@@ -100,7 +122,7 @@
             <div id="giftBtnArea" style="text-align:center; padding: 5px;"></div>
             <div style="background:rgba(255,255,255,0.9); padding:10px; border-radius:15px; text-align:center;">
                 <div id="finalEmojiDisplay" style="font-size:20px;"></div>
-                <p style="font-size:9px; color:var(--pink); font-weight:bold; margin:0;">SCROLL TO READ ALL 📜</p>
+                <p style="font-size:9px; color:var(--pink); font-weight:bold; margin:0;">SCROLL FOR MORE 📜</p>
             </div>
         </div>
     </div>
@@ -108,8 +130,8 @@
     <div id="giftCardPage" class="container hidden">
         <img id="bg2" class="card-bg-layer">
         <div class="content" style="justify-content:center;">
-            <div id="zoomContainer" style="width:95%; height:60vh; display:flex; align-items:center; justify-content:center;"></div>
-            <button class="btn" onclick="showScreen('finalAnsSheet')" style="width:60%; margin-top:20px;">⬅️ Back</button>
+            <div id="zoomContainer" style="width:90%; height:55vh; display:flex; align-items:center; justify-content:center;"></div>
+            <button class="btn" onclick="showScreen('finalAnsSheet')" style="width:50%; margin-top:20px;">⬅️ Back</button>
         </div>
     </div>
 
@@ -135,7 +157,7 @@
 
         function showWelcome() {
             let n = document.getElementById('visitorName').value;
-            if(!n) return alert("Please enter name!");
+            if(!n) return alert("Enter Name!");
             document.getElementById('displayWelcome').innerText = `Welcome, ${n}!`;
             showScreen('welcomeScreen');
             startMagic();
@@ -149,14 +171,12 @@
                 item.innerText = symbols[Math.floor(Math.random() * symbols.length)];
                 item.style.left = Math.random() * 100 + 'vw';
                 item.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                item.style.fontSize = (Math.random() * 20 + 15) + 'px';
                 document.body.appendChild(item);
                 setTimeout(() => item.remove(), 5000);
-            }, 250);
+            }, 300);
         }
 
         function startSetup() {
-            const r = new FileReader();
             const f1 = document.getElementById('up1').files[0];
             const f2 = document.getElementById('up2').files[0];
             const fb = document.getElementById('upBG').files[0];
@@ -167,14 +187,14 @@
         }
 
         function loadQ() {
-            document.getElementById('qCount').innerText = `QUESTION ${currentIdx + 1}/10`;
+            document.getElementById('qCount').innerText = `STEP ${currentIdx + 1}/10`;
             document.getElementById('qDisplay').innerText = questions[currentIdx];
             document.getElementById('ansInput').value = "";
         }
 
         function nextQ() {
             let v = document.getElementById('ansInput').value;
-            if(!v) return alert("Write something!");
+            if(!v) return alert("Please answer!");
             answers.push(v); currentIdx++;
             if(currentIdx < 10) loadQ(); else showScreen('step3');
         }
@@ -189,7 +209,6 @@
             document.querySelectorAll('.nm1').forEach(e=>e.innerText=document.getElementById('n1').value);
             document.querySelectorAll('.nm2').forEach(e=>e.innerText=document.getElementById('n2').value);
             document.getElementById('finalEmojiDisplay').innerText = document.getElementById('giftEmoji').value || "💖";
-            
             if(p1) document.getElementById('f1').src = p1;
             if(p2) document.getElementById('f2').src = p2;
             if(bg) { document.getElementById('bg1').src = bg; document.getElementById('bg2').src = bg; }
@@ -200,10 +219,10 @@
             });
 
             if(giftD) {
-                document.getElementById('giftBtnArea').innerHTML = `<button class="btn" style="background:#000; color:var(--neon); border:2px solid var(--neon); width:auto; padding:5px 15px;" onclick="showScreen('giftCardPage')">🎁 View Surprise Gift</button>`;
+                document.getElementById('giftBtnArea').innerHTML = `<button class="btn" style="background:#000; color:var(--neon); border:2px solid var(--neon); width:auto; font-size:12px;" onclick="showScreen('giftCardPage')">🎁 View Surprise</button>`;
                 document.getElementById('zoomContainer').innerHTML = gMime === 'image' 
-                    ? `<img src="${giftD}" style="max-width:100%; max-height:100%; border-radius:10px; border:3px solid var(--neon);">` 
-                    : `<video src="${giftD}" autoplay loop muted style="max-width:100%; max-height:100%; border-radius:10px;"></video>`;
+                    ? `<img src="${giftD}" style="max-width:100%; border:4px solid var(--neon); border-radius:15px;">` 
+                    : `<video src="${giftD}" autoplay loop muted style="max-width:100%;"></video>`;
             }
             showScreen('finalAnsSheet');
         }
